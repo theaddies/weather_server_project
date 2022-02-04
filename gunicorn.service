@@ -1,0 +1,14 @@
+[Unit]
+Description=bigdaddy addie weather
+After=network.target
+
+[Service]
+User=bigdaddy
+Group=bigdaddy
+WorkingDirectory=/home/bigdaddy/app/src/
+Environment="PATH=/home/bigdaddy/app/venv/bin"
+EnvironmentFile=/home/bigdaddy/.env
+ExecStart=/home/bigdaddy/app/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
