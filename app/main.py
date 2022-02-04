@@ -31,7 +31,7 @@ app.add_middleware(
 )
 
 
-models.Base.metadata.create_all(bind=engine)
+#models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -39,17 +39,17 @@ app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
 
-while True:
-    try:
-        conn = psycopg2.connect(host = 'localhost', database='weather_server', user = 'postgres',
-        password = 'Lilly911a', cursor_factory = RealDictCursor)
-        cursor = conn.cursor()
-        print('database connection made')
-        break
-    except Exception as error:
-        print('connecting to database failed.')
-        print('the error was', error)
-        time.sleep(2)
+# while True:
+#     try:
+#         conn = psycopg2.connect(host = 'localhost', database='weather_server', user = 'postgres',
+#         password = 'Lilly911a', cursor_factory = RealDictCursor)
+#         cursor = conn.cursor()
+#         print('database connection made')
+#         break
+#     except Exception as error:
+#         print('connecting to database failed.')
+#         print('the error was', error)
+#         time.sleep(2)
 
 # def find_post(id):
 #     for p in my_posts:
