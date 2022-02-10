@@ -42,7 +42,7 @@ def upgrade():
     op.add_column('weather_data', sa.Column('current', sa.SmallInteger(), nullable=False))
     op.add_column('weather_data', sa.Column('voltage', sa.Float(), nullable=False))
     op.add_column('weather_data', sa.Column('power', sa.SmallInteger(), nullable=False))
-    op.add_column('weather_data', sa.Column('date', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False))
+#    op.add_column('weather_data', sa.Column('date', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False))
     op.add_column('weather_data', sa.Column('created_at', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False))
     # ### end Alembic commands ###
 

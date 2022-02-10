@@ -15,7 +15,7 @@ class PostBase(BaseModel):
     current: int
     voltage: float
     power: int
-    date: datetime
+#    date: datetime
 
 class PostCreate(PostBase):
     pass
