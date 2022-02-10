@@ -1,4 +1,4 @@
-from fastapi import Body, FastAPI, Response, status, HTTPException, Depends, APIRouter
+from fastapi import Body, FastAPI, Response, status, HTTPException, Depends, APIRouter, Header
 from .. import models, schemas, oauth2
 from sqlalchemy.orm import Session
 from ..database import engine, get_db
@@ -16,6 +16,7 @@ router = APIRouter(
 @router.get("/", response_model=List[schemas.Post])
 def get_posts(db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
+#    posts.headers.add('Access-Control-Allow-Origin', '*')
     return posts
 
 #this is getting a post with old sql
