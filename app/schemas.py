@@ -1,3 +1,6 @@
+from decimal import Decimal
+from unicodedata import decimal
+from graphene import Int
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
@@ -13,7 +16,7 @@ class PostBase(BaseModel):
     bno_direction: int
     event_direction: int
     current: int
-    voltage: float
+    voltage: Decimal #changed from float
     power: int
 #    date: datetime
 
