@@ -16,7 +16,7 @@ class PostBase(BaseModel):
     bno_direction: int
     event_direction: int
     current: int
-    voltage: Decimal #changed from float
+    voltage: float
     power: int
 #    date: datetime
 
