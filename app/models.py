@@ -17,7 +17,7 @@ class Post(Base):
     current = Column(SmallInteger, nullable = False, default = 0)
     voltage = Column(Float, nullable = False, default = 0)
     power = Column(SmallInteger, nullable = False, default = 0.)
-    date = Column(TIMESTAMP(timezone=True), nullable = False, server_default = text('now()'))
+    #date = Column(TIMESTAMP(timezone=True), nullable = False, server_default = text('now()'))
     created_at = Column(TIMESTAMP(timezone=True), nullable = False, server_default = text('now()'))
 
     # owner_id = Column(Integer, ForeignKey(
