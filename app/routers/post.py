@@ -19,6 +19,28 @@ def get_posts(db: Session = Depends(get_db)):
 #    posts.headers.add('Access-Control-Allow-Origin', '*')
     return posts
 
+@router.get("/last", response_model=schemas.Post)
+def get_post(db: Session = Depends(get_db)):
+    post = db.query(models.Post).order_by(models.Post.id.desc()).first()
+    #printing post above without the .first() shows teh query
+    if not post:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail =f"Last post not found" )
+    return post
+
+
+@router.get("/{id}")
+def get_post(id: int, db: Session = Depends(get_db)):
+    # cursor.execute("""SELECT * FROM weather_data WHERE id = %s""", (str(id)))
+    # post = cursor.fetchone()
+    post = db.query(models.Post).filter(models.Post.id == id).first()
+    #printing post above without the .first() shows teh query
+    #print(post)
+    if not post:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail =f"post with id: {id} was not found" )
+    return post
+
+
+
 #this is getting a post with old sql
 # @app.get("/posts")
 # async def get_posts():
@@ -54,16 +76,6 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db)):
     db.refresh(new_post)
     return new_post
 
-@router.get("/{id}")
-def get_post(id: int, db: Session = Depends(get_db)):
-    # cursor.execute("""SELECT * FROM weather_data WHERE id = %s""", (str(id)))
-    # post = cursor.fetchone()
-    post = db.query(models.Post).filter(models.Post.id == id).first()
-    #printing post above without the .first() shows teh query
-    #print(post)
-    if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail =f"post with id: {id} was not found" )
-    return post
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(id: int, db: Session = Depends(get_db)):
