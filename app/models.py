@@ -13,7 +13,7 @@ class Post(Base):
     humid = Column(SmallInteger, nullable = False, default = 0)
     wind_speed = Column(SmallInteger, nullable = False, default = 0)
     wind_direction = Column(SmallInteger, nullable = False, default = 0)
-    event_direction = Column(SmallInteger, nullable = False, default = 0)
+    #event_direction = Column(SmallInteger, nullable = False, default = 0)
     bno_direction = Column(SmallInteger, nullable = False, default = 0)
     current = Column(SmallInteger, nullable = False, default = 0)
     voltage = Column(Float, nullable = False, default = 0)
