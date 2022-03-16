@@ -23,15 +23,15 @@ app = FastAPI()
 #origins = ["*"]
 
 origins = ['http://localhost', 'http://localhost:8000', 'http://localhost:5000',
-        'http://192.168.1.155', 'http://192.168.1.155:8000',
-        'https://192.168.1.155', 'https://192.168.1.155:8000',
+        'http://192.168.1.77', 'http://192.168.1.77:8000',
+        'https://192.168.1.77', 'https://192.168.1.77:8000',
         'http://weather.smartnprivate.com', 'http://weatherapi.smartnprivate.com',  
         'https://weather.smartnprivate.com', 'https://weatherapi.smartnprivate.com',]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-#    allow_credentials=True,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )

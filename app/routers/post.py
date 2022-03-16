@@ -1,7 +1,9 @@
 from fastapi import Body, FastAPI, Response, status, HTTPException, Depends, APIRouter, Header
 from .. import models, schemas, oauth2
 from sqlalchemy.orm import Session
+from sqlalchemy import Date, cast
 from ..database import engine, get_db
+from datetime import date, timedelta, datetime, timezone
 
 from typing import List, Optional
 
@@ -12,12 +14,21 @@ router = APIRouter(
     tags=['Posts']
 )
 
-
 @router.get("/", response_model=List[schemas.Post])
 def get_posts(db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
 #    posts.headers.add('Access-Control-Allow-Origin', '*')
     return posts
+
+@router.get("/day")#, response_model=schemas.Post)
+def get_post( db: Session = Depends(get_db)):
+    now = datetime.now(timezone.utc)
+    twenty_four_hours_ago = now - timedelta(hours=24)
+    post = db.query(models.Post).filter((cast(models.Post.created_at,Date)) > twenty_four_hours_ago).all()
+    #printing post above without the .first() shows teh query
+    if not post:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail =f"Last post not found" )
+    return post
 
 @router.get("/last", response_model=schemas.Post)
 def get_post(db: Session = Depends(get_db)):
@@ -26,7 +37,6 @@ def get_post(db: Session = Depends(get_db)):
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail =f"Last post not found" )
     return post
-
 
 @router.get("/{id}")
 def get_post(id: int, db: Session = Depends(get_db)):
