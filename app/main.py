@@ -22,14 +22,14 @@ app = FastAPI()
 
 #origins = ["*"]
 
-origins = ['http://localhost', 'http://localhost:8000', 'http://localhost:5000',
-        'http://192.168.1.77', 'http://192.168.1.77:8000',
-        'https://192.168.1.77', 'https://192.168.1.77:8000',
-        'http://192.168.1.77/history', 'http://192.168.1.77:8000/history',
-        'https://192.168.1.77/history', 'https://192.168.1.77:8000/history',
-        'http://weather.smartnprivate.com', 'http://weatherapi.smartnprivate.com',  
-        'https://weather.smartnprivate.com', 'https://weatherapi.smartnprivate.com',
-        'https://weather.smartnprivate.com/history','https://weather.smartnprivate.com/history']
+origins = ['http://localhost', 'http://localhost:8000', 'http://localhost:5000', \
+        'http://192.168.1.77', 'http://192.168.1.77:8000', \
+        'https://192.168.1.77', 'https://192.168.1.77:8000', \
+        'http://192.168.1.77/history', 'http://192.168.1.77:8000/history', \
+        'https://192.168.1.77/history', 'https://192.168.1.77:8000/history', \
+        'http://weather.smartnprivate.com', 'http://weatherapi.smartnprivate.com',  \
+        'https://weather.smartnprivate.com', 'https://weatherapi.smartnprivate.com', \
+        'https://weather.smartnprivate.com/history','https://weather.smartnprivate.com/history',]
 
 app.add_middleware(
     CORSMiddleware,
