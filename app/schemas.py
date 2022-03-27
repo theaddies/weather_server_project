@@ -14,7 +14,7 @@ class PostBase(BaseModel):
     wind_speed: int
     wind_direction: int
     bno_direction: int
-#    event_direction: int
+    w_temp: int
     current: int
     voltage: float
     power: int
