@@ -33,6 +33,19 @@ def get_post( db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail =f"Last post not found" )
     return post
 
+@router.get("/hour")#, response_model=schemas.Post)
+def get_post( db: Session = Depends(get_db)):
+    now = datetime.now(timezone(timedelta(hours=-4), 'EST'))
+    print(now)
+    one_hour_ago = now - timedelta(hours=1)
+    print(one_hour_ago)
+    post = db.query(models.Post).filter(models.Post.created_at.between(one_hour_ago, now)).all()
+   # post = db.query(models.Post).filter((cast(models.Post.created_at,Date)) > twenty_four_hours_ago).all()
+    #printing post above without the .first() shows teh query
+    if not post:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail =f"Last post not found" )
+    return post
+
 @router.get("/date/{start_date}/{end_date}")#, response_model=schemas.Post)
 def get_post(start_date: str, end_date: str, db: Session = Depends(get_db)):
     #now = datetime.now(timezone(timedelta(hours=-4), 'EST'))
